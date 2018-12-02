@@ -33,3 +33,11 @@ div#the-form {
     background-color: green;
     color: white;
 }
+
+.product-list {
+    font-size: small
+}
+
+.product-list li {
+    list-style-type: none;
+}
