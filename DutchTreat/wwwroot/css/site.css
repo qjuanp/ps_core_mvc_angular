@@ -41,3 +41,20 @@ div#the-form {
 .product-list li {
     list-style-type: none;
 }
+
+.product-info {
+    border: 1px solid gray;
+    display: inline-block;
+    padding: 8px 2px;
+    margin: 2px;
+    width: 450px;
+    border-radius: 5px;
+    background-color: lightgray;
+}
+
+.product-info img {
+    margin: 5px;
+    float: left;
+    border: 1px solid black;
+    max-width: 150px;
+}
