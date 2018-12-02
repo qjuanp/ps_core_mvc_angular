@@ -1,0 +1,24 @@
+/*
+Order in this file matters, last rules overrides first rules
+but not if this interfere with some other rule
+*/
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input, textarea {
+    font-size: 18px;
+    width: 200px;
+}
+
+/*
+The more specific rule wins over the more general rule
+*/
+input[type=submit] {
+    width: auto;
+}
+
+label {
+    font-size: 16px;
+}
