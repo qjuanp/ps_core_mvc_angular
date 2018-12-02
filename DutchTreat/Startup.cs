@@ -26,6 +26,9 @@ namespace DutchTreat
 
             // Allows to serve static files from default path 'wwwroot'
             app.UseStaticFiles();
+
+            // Extension from OdeToCode.UseNodeModules
+            app.UseNodeModules(env);
         }
     }
 }
