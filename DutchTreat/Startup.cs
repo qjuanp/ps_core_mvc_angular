@@ -21,6 +21,7 @@ namespace DutchTreat
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // Allows using default files like index.html
+            // Resolve root and folder urls to use default file
             app.UseDefaultFiles();
 
             // Allows to serve static files from default path 'wwwroot'
