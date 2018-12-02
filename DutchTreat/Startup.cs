@@ -20,6 +20,9 @@ namespace DutchTreat
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Allows using default files like index.html
+            app.UseDefaultFiles();
+
             // Allows to serve static files from default path 'wwwroot'
             app.UseStaticFiles();
         }
