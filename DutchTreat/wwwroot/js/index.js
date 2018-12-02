@@ -1,5 +1,12 @@
-var form = document.getElementById('the-form')
-form.hidden = true
+var form = $('#the-form')
+form.hide()
 
-var buyButton = document.getElementById('buy-button')
-buyButton.addEventListener('click', function() { console.log('Buying item') })
+var buyButton = $('#buy-button')
+buyButton.on('click', function () {
+    console.log('Buying item')
+})
+
+var productInfo = $('.product-info li')
+productInfo.on('click', function () {
+    console.log('You clicked on ' + $(this).text())
+})
