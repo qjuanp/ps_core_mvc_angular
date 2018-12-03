@@ -8,8 +8,10 @@ namespace DutchTreat.Controllers
     {
         public IActionResult Index() => View();
 
+        [HttpGet("contact")]
         public IActionResult Contact() => View();
 
+        [HttpGet("about")]
         public IActionResult About() => View();
     }
 }
