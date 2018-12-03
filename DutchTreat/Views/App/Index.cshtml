@@ -1,73 +1,58 @@
 @{
     ViewBag.Title = "Home page";
 }
-<!DOCUMENT html>
-<html>
 
-<head>
-    <title>Dutch Treat: @ViewBag.Title</title>
-    <link href="~/css/site.css" rel="stylesheet" />
-</head>
+<div class="product-info">
+    <img src="~/img/VanGogh.jpg" />
+    <h3>Mug</h3>
+    <ul class="product-list">
+        <li>Price: $ 9.99</li>
+        <li>Artist: Van Gogh</li>
+        <li>Title:</li>
+        <li>Description: Self-portrait</li>
+    </ul>
+    <button id="buy-button">Buy</button>
+</div>
 
-<body>
-    <h2>@ViewBag.Title</h2>
-    <div class="product-info">
-        <img src="~/img/VanGogh.jpg" />
-        <h3>Mug</h3>
-        <ul class="product-list">
-            <li>Price: $ 9.99</li>
-            <li>Artist: Van Gogh</li>
-            <li>Title:</li>
-            <li>Description: Self-portrait</li>
-        </ul>
-        <button id="buy-button">Buy</button>
-    </div>
+<div id="the-form">
+    <form>
+        <label>Your Name:</label>
+        <br />
+        <input />
+        <br />
+        <label>Email:</label>
+        <br />
+        <input type="email" />
+        <br />
+        <label>Subject:</label>
+        <br />
+        <input type="text" /> <!-- Same as <input />-->
+        <br />
+        <label>Message:</label>
+        <br />
+        <textarea rows="4"></textarea>
+        <br />
+        <input type="submit" value="Send message" />
+    </form>
+</div>
 
-    <div id="the-form">
-        <form>
-            <label>Your Name:</label>
-            <br />
+<div>
+    <div id="login-toggle">Login</div>
+    <form class="popup-form">
+        <div>
+            <label>Username</label>
             <input />
-            <br />
-            <label>Email:</label>
-            <br />
-            <input type="email" />
-            <br />
-            <label>Subject:</label>
-            <br />
-            <input type="text" /> <!-- Same as <input />-->
-            <br />
-            <label>Message:</label>
-            <br />
-            <textarea rows="4"></textarea>
-            <br />
-            <input type="submit" value="Send message" />
-        </form>
-    </div>
-
-    <div>
-        <div id="login-toggle">Login</div>
-        <form class="popup-form">
-            <div>
-                <label>Username</label>
-                <input />
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" />
-            </div>
-            <div>
-                <input type="checkbox" />
-                <label>Remember me?</label>
-            </div>
-            <div>
-                <input type="submit" value="login" />
-            </div>
-        </form>
-    </div>
-
-    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/index.js"></script>
-</body>
-
-</html>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" />
+        </div>
+        <div>
+            <input type="checkbox" />
+            <label>Remember me?</label>
+        </div>
+        <div>
+            <input type="submit" value="login" />
+        </div>
+    </form>
+</div>
