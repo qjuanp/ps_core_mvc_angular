@@ -1,7 +1,7 @@
-/*
+/* /*
 Order in this file matters, last rules overrides first rules
 but not if this interfere with some other rule
-*/
+
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,7 +15,7 @@ textarea {
 
 /*
 The more specific rule wins over the more general rule
-*/
+
 
 input[type=submit] {
     width: auto;
@@ -92,4 +92,4 @@ menu li {
 
     menu li:last-of-type::after {
         content : '';
-    }
+    } */
