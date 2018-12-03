@@ -11,6 +11,12 @@ namespace DutchTreat.Controllers
         [HttpGet("contact")]
         public IActionResult Contact() => View();
 
+        [HttpPost("contact")]
+        public IActionResult Contact(object model)
+        {
+            return View();
+        }
+
         [HttpGet("about")]
         public IActionResult About() => View();
     }
