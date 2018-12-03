@@ -6,12 +6,10 @@ namespace DutchTreat.Controllers
 {
     public class AppController : Controller
     {
-        private readonly IHostingEnvironment _env;
+        public IActionResult Index() => View();
 
-        public AppController(IHostingEnvironment env) => _env = env;
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Contact() => View();
+
+        public IActionResult About() => View();
     }
 }
