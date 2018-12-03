@@ -11,7 +11,7 @@
 <form method="post">
     <!-- ModelOnly: Shows only errors of the entire model -->
     <div asp-validation-summary="ModelOnly"></div>
-    
+
     <label asp-for="Name">Your Name:</label>
     <br />
     <input asp-for="Name"/>
@@ -37,4 +37,5 @@
     <br />
 
     <input type="submit" value="Send message" />
+    <div>@ViewBag.UserMessage</div>
 </form>
