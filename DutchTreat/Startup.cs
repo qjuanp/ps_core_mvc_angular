@@ -22,9 +22,13 @@ namespace DutchTreat
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if(env.IsDevelopment()) // equivalent to -> env.IsEnvironment("Development")
+            if (env.IsDevelopment()) // equivalent to -> env.IsEnvironment("Development")
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/error");
             }
 
             // Allows to serve static files from default path 'wwwroot'
