@@ -29,18 +29,18 @@ div#the-form {
     background-color: lightgrey;
 }
 
-#the-form input[type=submit] {
-    background-color: green;
-    color: white;
-}
+    #the-form input[type=submit] {
+        background-color: green;
+        color: white;
+    }
 
 .product-list {
     font-size: small
 }
 
-.product-list li {
-    list-style-type: none;
-}
+    .product-list li {
+        list-style-type: none;
+    }
 
 .product-info {
     border: 1px solid gray;
@@ -52,9 +52,33 @@ div#the-form {
     background-color: lightgray;
 }
 
-.product-info img {
-    margin: 5px;
-    float: left;
-    border: 1px solid black;
-    max-width: 150px;
+    .product-info img {
+        margin: 5px;
+        float: left;
+        border: 1px solid black;
+        max-width: 150px;
+    }
+
+#login-toggle {
+    cursor: pointer;
 }
+
+.popup-form {
+    padding: 5px;
+    border: 2px black inset;
+    display: inline-block;
+}
+    
+    .popup-form input {
+        width: 200px;
+    }
+
+    .popup-form label {
+        width: 150px;
+        display: inline-block;
+    }
+
+    .popup-form input[type=checkbox],
+    .popup-form input[type=submit] {
+        width: auto;
+    }
