@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using DutchTreat.Data;
 using DutchTreat.Services;
 using DutchTreat.ViewModels;
 using Microsoft.AspNetCore.Hosting;
@@ -10,9 +12,15 @@ namespace DutchTreat.Controllers
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
+        private readonly DutchContext _conext;
 
-        public AppController(IMailService mailService) => _mailService = mailService;
-
+        public AppController(
+            IMailService mailService,
+            DutchContext conext)
+        {
+            _mailService = mailService;
+            _conext = conext;
+        }
         public IActionResult Index() => View();
 
         [HttpGet("contact")]
@@ -27,11 +35,17 @@ namespace DutchTreat.Controllers
                 ViewBag.UserMessage = "Mail sent!";
                 ModelState.Clear();
             }
-            
+
             return View();
         }
 
         [HttpGet("about")]
         public IActionResult About() => View();
+
+        public IActionResult Shop() => 
+            View(_conext
+                .Products
+                .OrderBy(p => p.Category)
+                .ToList());
     }
 }
