@@ -34,6 +34,8 @@ namespace DutchTreat
                 cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
             });
 
+            services.AddTransient<DutchSeeder>();
+
             // Add required services by MVC
             services.AddMvc();
 

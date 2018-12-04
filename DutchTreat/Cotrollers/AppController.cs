@@ -21,7 +21,11 @@ namespace DutchTreat.Controllers
             _mailService = mailService;
             _conext = conext;
         }
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            var results = _conext.Products.ToList();
+            return View();
+        }
 
         [HttpGet("contact")]
         public IActionResult Contact() => View();
@@ -42,7 +46,7 @@ namespace DutchTreat.Controllers
         [HttpGet("about")]
         public IActionResult About() => View();
 
-        public IActionResult Shop() => 
+        public IActionResult Shop() =>
             View(_conext
                 .Products
                 .OrderBy(p => p.Category)
