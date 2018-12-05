@@ -1,5 +1,11 @@
 {
-    "ConnectionStrings" : {
-        "DutchConnectionString" : "server=.\\SQLExpress;Database=DutchTreatDb;Integrated Security=true;MultipleActiveResultSets=true;"
+    "ConnectionStrings": {
+        "DutchConnectionString": "server=.\\SQLExpress;Database=DutchTreatDb;Integrated Security=true;MultipleActiveResultSets=true;"
+    },
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft": "Warning"
+        }
     }
 }
