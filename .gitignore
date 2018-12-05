@@ -35,3 +35,6 @@ msbuild.wrn
 
 # NPM
 node_modules/
+
+# Sqlite
+*.db
