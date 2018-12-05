@@ -31,7 +31,7 @@ namespace DutchTreat
             //
             // Also, configured DbContext to use a provider
             services.AddDbContext<DutchContext>(cfg => {
-                cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
+                cfg.UseSqlite(_config.GetConnectionString("DutchConnectionString"));
             });
 
             services.AddScoped<IDutchRepository, DutchRepository>();

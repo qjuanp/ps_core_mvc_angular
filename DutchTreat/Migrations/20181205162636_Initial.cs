@@ -1,10 +1,9 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DutchTreat.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +12,7 @@ namespace DutchTreat.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     OrderDate = table.Column<DateTime>(nullable: false),
                     OrderNumber = table.Column<string>(nullable: true)
                 },
@@ -27,7 +26,7 @@ namespace DutchTreat.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Category = table.Column<string>(nullable: true),
                     Size = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
@@ -50,7 +49,7 @@ namespace DutchTreat.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     ProductId = table.Column<int>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     UnitPrice = table.Column<decimal>(nullable: false),

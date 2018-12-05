@@ -1,6 +1,6 @@
 {
     "ConnectionStrings": {
-        "DutchConnectionString": "server=.\\SQLExpress;Database=DutchTreatDb;Integrated Security=true;MultipleActiveResultSets=true;"
+        "DutchConnectionString": "Data Source=DutchTreat.db"
     },
     "Logging": {
         "LogLevel": {
