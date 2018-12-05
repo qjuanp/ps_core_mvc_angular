@@ -7,6 +7,7 @@ using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,7 +40,10 @@ namespace DutchTreat
             services.AddTransient<DutchSeeder>();
 
             // Add required services by MVC
-            services.AddMvc();
+            services
+                .AddMvc()
+                // Support latest features of MVC
+                .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             // Registering services
             services.AddTransient<IMailService, NullMailService>();
