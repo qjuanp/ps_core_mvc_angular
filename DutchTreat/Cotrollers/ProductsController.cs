@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DutchTreat.Data;
@@ -23,7 +24,17 @@ namespace DutchTreat.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Product>> Get() =>
-            await _repository.GetAll();
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                return Ok(await _repository.GetAll());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get products {ex}");
+                return BadRequest("Failed to get products");
+            }
+        }
     }
 }
