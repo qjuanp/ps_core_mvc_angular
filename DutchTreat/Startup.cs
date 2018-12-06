@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DutchTreat.Data;
+using DutchTreat.Data.Entities;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,12 @@ namespace DutchTreat
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddIdentity<StoredUser, IdentityRole>(cfg => {
+                    cfg.User.RequireUniqueEmail = true;
+                })
+                .AddEntityFrameworkStores<DutchContext>();
+
             // Added DutchContext to the container to be resolved
             // when other services require it
             //
@@ -67,6 +75,8 @@ namespace DutchTreat
             {
                 app.UseExceptionHandler("/error");
             }
+
+            app.UseAuthentication();
 
             // Allows to serve static files from default path 'wwwroot'
             app.UseStaticFiles();
