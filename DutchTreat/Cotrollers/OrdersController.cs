@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using DutchTreat.Data;
 using DutchTreat.Data.Entities;
+using DutchTreat.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -52,13 +53,34 @@ namespace DutchTreat.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Order model)
+        public async Task<IActionResult> Post([FromBody] OrderViewModel model)
         {
             try
             {
-                await _repository.AddEntity(model);
-                if (await _repository.SaveAll())
-                    return Created($"/api/Orders/{model.Id}", model);
+                if (ModelState.IsValid)
+                {
+                    var order = new Order
+                    {
+                        Id = model.OrderId,
+                        OrderDate = model.OrderDate == DateTime.MinValue ?
+                            DateTime.Now : model.OrderDate,
+                        OrderNumber = model.OrderNumber
+                    };
+
+                    await _repository.AddEntity(order);
+                    if (await _repository.SaveAll())
+                    {
+                        var savedOrderViewModel = new OrderViewModel
+                        {
+                            OrderId = order.Id,
+                            OrderNumber = order.OrderNumber,
+                            OrderDate = order.OrderDate
+                        };
+                        return Created($"/api/Orders/{savedOrderViewModel.OrderId}", savedOrderViewModel);
+                    }
+                }
+                else
+                    return BadRequest(ModelState);
             }
             catch (Exception ex)
             {
