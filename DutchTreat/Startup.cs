@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DutchTreat.Data;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
 namespace DutchTreat
@@ -32,23 +34,38 @@ namespace DutchTreat
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddIdentity<StoredUser, IdentityRole>(cfg => {
+                .AddIdentity<StoredUser, IdentityRole>(cfg =>
+                {
                     cfg.User.RequireUniqueEmail = true;
                 })
                 .AddEntityFrameworkStores<DutchContext>();
+
+            services
+                .AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = _config["Tokens:Issuer"],
+                        ValidAudience = _config["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                    };
+                });
 
             // Added DutchContext to the container to be resolved
             // when other services require it
             //
             // Also, configured DbContext to use a provider
-            services.AddDbContext<DutchContext>(cfg => {
+            services.AddDbContext<DutchContext>(cfg =>
+            {
                 cfg.UseSqlite(_config.GetConnectionString("DutchConnectionString"));
             });
 
             services.AddAutoMapper();
 
             services.AddScoped<IDutchRepository, DutchRepository>();
-            
+
             services.AddTransient<DutchSeeder>();
 
             // Add required services by MVC
@@ -56,8 +73,8 @@ namespace DutchTreat
                 .AddMvc()
                 // Support latest features of MVC
                 .SetCompatibilityVersion(CompatibilityVersion.Latest)
-                
-                .AddJsonOptions(cfg => 
+
+                .AddJsonOptions(cfg =>
                     cfg.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             // Registering services

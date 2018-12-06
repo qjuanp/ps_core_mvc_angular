@@ -7,5 +7,9 @@
             "Default": "Information",
             "Microsoft": "Warning"
         }
+    },
+    "Tokens": {
+        "Issuer": "localhost",
+        "Audience": "users"
     }
 }

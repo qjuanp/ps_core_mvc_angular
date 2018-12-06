@@ -7,6 +7,7 @@ using DutchTreat.Data.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace DutchTreat.Data
@@ -15,15 +16,18 @@ namespace DutchTreat.Data
     {
         private readonly DutchContext _context;
         private readonly IHostingEnvironment _hosting;
+        private readonly IConfiguration _configuration;
         private readonly UserManager<StoredUser> _userManager;
 
         public DutchSeeder(
             DutchContext context,
             IHostingEnvironment hosting,
+            IConfiguration configuration,
             UserManager<StoredUser> userManager)
         {
             _context = context;
             _hosting = hosting;
+            _configuration = configuration;
             _userManager = userManager;
         }
 
@@ -31,19 +35,19 @@ namespace DutchTreat.Data
         {
             await _context.Database.EnsureCreatedAsync();
 
-            StoredUser user = await _userManager.FindByEmailAsync("qjuanp@gmail.com");
+            StoredUser user = await _userManager.FindByEmailAsync(_configuration["Defaults:User:Email"]);
 
             if (user == null)
             {
                 user = new StoredUser
                 {
-                    FirtsName = "Juan",
-                    LastName = "Giraldo",
-                    Email = "qjuanp@gmail.com",
-                    UserName = "qjuanp@gmail.com"
+                    FirtsName = _configuration["Defaults:User:Name"],
+                    LastName = _configuration["Defaults:User:LastName"],
+                    Email = _configuration["Defaults:User:Email"],
+                    UserName = _configuration["Defaults:User:Email"]
                 };
 
-                var result = await _userManager.CreateAsync(user, "T3mp@pwd!-#");
+                var result = await _userManager.CreateAsync(user, _configuration["Defaults:User:Password"]);
 
                 if (result != IdentityResult.Success)
                     throw new InvalidOperationException("Could not create new user in seeder");

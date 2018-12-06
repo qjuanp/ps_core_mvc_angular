@@ -57,7 +57,8 @@ namespace DutchTreat
                 .AddJsonFile(
                     "config.json",
                     optional: false,
-                    reloadOnChange: true);
+                    reloadOnChange: true)
+                .AddEnvironmentVariables(prefix: "DUTCHAPP_");
         }
     }
 }
