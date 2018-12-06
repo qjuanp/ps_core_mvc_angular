@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DutchTreat.Data;
 using DutchTreat.Services;
 using DutchTreat.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,7 @@ namespace DutchTreat.Controllers
         [HttpGet("about")]
         public IActionResult About() => View();
 
+        [Authorize]
         public async Task<IActionResult> Shop() =>
             View(await _repository.GetAllProducts());
     }
