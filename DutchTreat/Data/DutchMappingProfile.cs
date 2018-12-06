@@ -12,6 +12,9 @@ namespace DutchTreat.Data
                 .ForMember(o => o.OrderId, m => m.MapFrom(o => o.Id))
                 // Takes the same configuration backwards
                 .ReverseMap();
+
+            CreateMap<OrderItem, OrderItemViewModel>()
+                .ReverseMap();
         }
     }
 }
