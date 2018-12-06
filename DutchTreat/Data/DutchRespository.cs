@@ -34,12 +34,16 @@ namespace DutchTreat.Data
                 .OrderBy(p => p.Title)
                 .ToListAsync();
 
-        public async Task<IEnumerable<Order>> GetAllOrders() =>
-            await _context
-                .Orders
-                .Include(o => o.Items)
-                    .ThenInclude(o => o.Product)
-                .ToListAsync();
+        public async Task<IEnumerable<Order>> GetAllOrders(bool includeItems) =>
+            includeItems ? 
+                await _context
+                    .Orders
+                    .Include(o => o.Items)
+                        .ThenInclude(o => o.Product)
+                    .ToListAsync() :
+                await _context
+                    .Orders
+                    .ToListAsync(); 
 
         public async Task<Order> GetOrderById(int id) =>
             await _context

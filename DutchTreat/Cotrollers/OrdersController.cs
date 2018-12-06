@@ -28,11 +28,11 @@ namespace DutchTreat.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(bool includeItems = true)
         {
             try
             {
-                return Ok(_mapper.Map<IEnumerable<Order>,IEnumerable<OrderViewModel>>(await _repository.GetAllOrders()));
+                return Ok(_mapper.Map<IEnumerable<Order>,IEnumerable<OrderViewModel>>(await _repository.GetAllOrders(includeItems)));
             }
             catch (Exception ex)
             {
