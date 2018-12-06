@@ -46,6 +46,6 @@ namespace DutchTreat.Controllers
         public IActionResult About() => View();
 
         public async Task<IActionResult> Shop() =>
-            View(await _repository.GetAll());
+            View(await _repository.GetAllProducts());
     }
 }

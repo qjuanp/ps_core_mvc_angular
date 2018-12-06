@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DutchTreat.Data.Entities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace DutchTreat.Data
@@ -31,7 +32,7 @@ namespace DutchTreat.Data
                 .Products
                 .AddRangeAsync(products);
 
-            AddExampleOrder(products.FirstOrDefault());
+            await AddExampleOrder(products.FirstOrDefault());
 
             await _context.SaveChangesAsync();
         }
@@ -43,22 +44,22 @@ namespace DutchTreat.Data
             return JsonConvert.DeserializeObject<IEnumerable<Product>>(json);
         }
 
-        private void AddExampleOrder(Product product)
+        private async Task AddExampleOrder(Product product)
         {
-            var exampleOrder = _context
-                .Orders
-                .Where(o => o.Id == 1)
-                .SingleOrDefault();
-
-            if (exampleOrder != null)
+            if (!await _context.Orders.AnyAsync(o => o.Id == 1))
             {
-                exampleOrder.Items = new List<OrderItem>() {
-                    new OrderItem {
-                        Product = product,
-                        Quantity = 5,
-                        UnitPrice = product.Price
+                await _context.Orders.AddAsync(new Order
+                {
+                    OrderDate = new DateTime(),
+                    OrderNumber = "1",
+                    Items = new List<OrderItem>() {
+                        new OrderItem {
+                            Product = product,
+                            Quantity = 5,
+                            UnitPrice = product.Price
+                        }
                     }
-                };
+                });
             }
         }
     }

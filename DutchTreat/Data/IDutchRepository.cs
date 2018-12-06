@@ -6,9 +6,15 @@ namespace DutchTreat.Data
 {
     public interface IDutchRepository
     {
-        Task<IEnumerable<Product>> GetAll();
+        Task<IEnumerable<Product>> GetAllProducts();
 
-        Task<IEnumerable<Product>> GetByCategory(string category);
+        Task<IEnumerable<Product>> GetProductsByCategory(string category);
+
+        Task<IEnumerable<Order>> GetAllOrders();
+        
+        Task<Order> GetOrderById(int id);
+        
+        Task AddEntity(object model);
 
         Task<bool> SaveAll();
     }

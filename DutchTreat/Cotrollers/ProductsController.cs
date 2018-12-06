@@ -32,7 +32,7 @@ namespace DutchTreat.Controllers
         {
             try
             {
-                return Ok(await _repository.GetAll());
+                return Ok(await _repository.GetAllProducts());
             }
             catch (Exception ex)
             {

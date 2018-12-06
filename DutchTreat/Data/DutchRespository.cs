@@ -19,7 +19,7 @@ namespace DutchTreat.Data
             _context = context;
             _logger = logger;
         }
-        public async Task<IEnumerable<Product>> GetAll()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
             _logger.LogInformation("GetAll was called");
             return await _context
@@ -27,12 +27,29 @@ namespace DutchTreat.Data
                 .OrderBy(p => p.Title)
                 .ToListAsync();
         }
-        public async Task<IEnumerable<Product>> GetByCategory(string category) =>
+        public async Task<IEnumerable<Product>> GetProductsByCategory(string category) =>
             await _context
                 .Products
                 .Where(p => p.Category == category)
                 .OrderBy(p => p.Title)
                 .ToListAsync();
+
+        public async Task<IEnumerable<Order>> GetAllOrders() =>
+            await _context
+                .Orders
+                .Include(o => o.Items)
+                    .ThenInclude(o => o.Product)
+                .ToListAsync();
+
+        public async Task<Order> GetOrderById(int id) =>
+            await _context
+                .Orders
+                .Include(o => o.Items)
+                    .ThenInclude(o => o.Product)
+                .SingleOrDefaultAsync(o => o.Id == id);
+
+        public async Task AddEntity(object model) =>
+            await _context.AddAsync(model);
 
         public async Task<bool> SaveAll() =>
             await _context.SaveChangesAsync() > 0;
